@@ -9,3 +9,6 @@
 [root@zhangyz postgresql-10.3]# ./configure --prefix=/usr/local/postgresql
 [root@zhangyz postgresql-10.3]# make && make install
 ```
+
+#### 添加用户和用户组
+
