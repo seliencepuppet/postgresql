@@ -1,5 +1,7 @@
 # postgresql
 
+<br/>
+
 ```shell
 [root@zhangyz src]# wget https://ftp.postgresql.org/pub/source/v10.3/postgresql-10.3.tar.gz
 [root@zhangyz src]# tar -xf postgresql-10.3.tar.gz 
