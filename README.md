@@ -16,3 +16,9 @@
 [root@zhangyz ~]# useradd postgres
 [root@zhangyz ~]# groupadd postgres
 ```
+
+#### 生成数据库文件目录
+
+```shell
+[root@zhangyz ~]# mkdir /usr/local/postgresql/data
+```
