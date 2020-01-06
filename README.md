@@ -22,3 +22,10 @@
 ```shell
 [root@zhangyz ~]# mkdir /usr/local/postgresql/data
 ```
+
+#### 更改用户文件夹访问权限
+
+```shell
+[root@zhangyz ~]# chown postgres /usr/local/postgresql/data/
+[root@zhangyz ~]# chgrp postgres /usr/local/postgresql/data/
+```
