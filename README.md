@@ -31,8 +31,8 @@
 ```
 
 ```shell
-[root@bdn ~]# su - postgres
-[postgres@bdn ~]$ /usr/local/postgresql/bin/initdb -D /usr/local/postgresql/data/
+[root@zhangyz ~]# su - postgres
+[postgres@zhangyz ~]$ /usr/local/postgresql/bin/initdb -D /usr/local/postgresql/data/
 The files belonging to this database system will be owned by user "postgres".
 This user must also own the server process.
 
@@ -59,107 +59,14 @@ You can change this by editing pg_hba.conf or using the option -A, or
 Success. You can now start the database server using:
 
     /usr/local/postgresql/bin/pg_ctl -D /usr/local/postgresql/data/ -l logfile start
+```
 
-[postgres@bdn ~]$ 
-[postgres@bdn ~]$ vim /usr/local/postgresql/data/pg_hba.conf 
-# PostgreSQL Client Authentication Configuration File
-# ===================================================
-#
-# Refer to the "Client Authentication" section in the PostgreSQL
-# documentation for a complete description of this file.  A short
-# synopsis follows.
-#
-# This file controls: which hosts are allowed to connect, how clients
-# are authenticated, which PostgreSQL user names they can use, which
-# databases they can access.  Records take one of these forms:
-#
-# local      DATABASE  USER  METHOD  [OPTIONS]
-# host       DATABASE  USER  ADDRESS  METHOD  [OPTIONS]
-# hostssl    DATABASE  USER  ADDRESS  METHOD  [OPTIONS]
-# hostnossl  DATABASE  USER  ADDRESS  METHOD  [OPTIONS]
-#
- 17 # (The uppercase items must be replaced by actual values.)
- 18 #
- 19 # The first field is the connection type: "local" is a Unix-domain
- 20 # socket, "host" is either a plain or SSL-encrypted TCP/IP socket,
- 21 # "hostssl" is an SSL-encrypted TCP/IP socket, and "hostnossl" is a
- 22 # plain TCP/IP socket.
- 23 #
- 24 # DATABASE can be "all", "sameuser", "samerole", "replication", a
- 25 # database name, or a comma-separated list thereof. The "all"
- 26 # keyword does not match "replication". Access to replication
- 27 # must be enabled in a separate record (see example below).
- 28 #
- 29 # USER can be "all", a user name, a group name prefixed with "+", or a
- 30 # comma-separated list thereof.  In both the DATABASE and USER fields
- 31 # you can also write a file name prefixed with "@" to include names
- 32 # from a separate file.
- 33 #
- 34 # ADDRESS specifies the set of hosts the record matches.  It can be a
- 35 # host name, or it is made up of an IP address and a CIDR mask that is
- 36 # an integer (between 0 and 32 (IPv4) or 128 (IPv6) inclusive) that
- 37 # specifies the number of significant bits in the mask.  A host name
- 38 # that starts with a dot (.) matches a suffix of the actual host name.
- 39 # Alternatively, you can write an IP address and netmask in separate
- 40 # columns to specify the set of hosts.  Instead of a CIDR-address, you
- 41 # can write "samehost" to match any of the server's own IP addresses,
- 42 # or "samenet" to match any address in any subnet that the server is
- 43 # directly connected to.
- 44 #
- 45 # METHOD can be "trust", "reject", "md5", "password", "scram-sha-256",
- 46 # "gss", "sspi", "ident", "peer", "pam", "ldap", "radius" or "cert".
- 47 # Note that "password" sends passwords in clear text; "md5" or
- 48 # "scram-sha-256" are preferred since they send encrypted passwords.
- 49 #
- 50 # OPTIONS are a set of options for the authentication in the format
- 51 # NAME=VALUE.  The available options depend on the different
- 52 # authentication methods -- refer to the "Client Authentication"
- 53 # section in the documentation for a list of which options are
- 54 # available for which authentication methods.
- 55 #
- 56 # Database and user names containing spaces, commas, quotes and other
- 57 # special characters must be quoted.  Quoting one of the keywords
- 58 # "all", "sameuser", "samerole" or "replication" makes the name lose
- 59 # its special character, and just match a database or username with
- 60 # that name.
- 61 #
- 62 # This file is read on server startup and when the server receives a
- 63 # SIGHUP signal.  If you edit the file on a running system, you have to
- 64 # SIGHUP the server for the changes to take effect, run "pg_ctl reload",
- 65 # or execute "SELECT pg_reload_conf()".
- 66 #
- 67 # Put your actual configuration here
- 68 # ----------------------------------
- 69 #
- 70 # If you want to allow non-local connections, you need to add more
- 71 # "host" records.  In that case you will also need to make PostgreSQL
- 72 # listen on a non-local interface via the listen_addresses
- 73 # configuration parameter, or via the -i or -h command line switches.
- 74 
- 75 # CAUTION: Configuring the system for local "trust" authentication
- 76 # allows any local user to connect as any PostgreSQL user, including
- 77 # the database superuser.  If you do not trust all your local users,
- 78 # use another authentication method.
- 79 
- 80 
- 81 # TYPE  DATABASE        USER            ADDRESS                 METHOD
- 82 
- 83 # "local" is for Unix domain socket connections only
- 84 local   all             all                                     trust
- 85 # IPv4 local connections:
- 86 host    all             all             127.0.0.1/32            trust
- 87 # IPv6 local connections:
- 88 host    all             all             ::1/128                 trust
- 89 # Allow replication connections from localhost, by a user with the
- 90 # replication privilege.
- 91 local   replication     all                                     trust
- 92 host    replication     all             127.0.0.1/32            trust
- 93 host    replication     all             ::1/128                 trust
- 94 host    all             postgres        0.0.0.0/0               md5
-"/usr/local/postgresql/data/pg_hba.conf" 94L, 4581C written                                                                                                                                               
-[postgres@bdn ~]$ 
-[postgres@bdn ~]$ 
-[postgres@bdn ~]$ vim /usr/local/postgresql/data/postgresql.conf 
+```shell
+[postgres@zhangyz ~]$ vim /usr/local/postgresql/data/pg_hba.conf 
+94 host    all             postgres        0.0.0.0/0               md5
+```                                                                                                                          
+```shell
+[postgres@zhangyz ~]$ vim /usr/local/postgresql/data/postgresql.conf 
   1 # -----------------------------
   2 # PostgreSQL configuration file
   3 # -----------------------------
@@ -235,39 +142,18 @@ Success. You can now start the database server using:
  73 #bonjour_name = ''                      # defaults to the computer name
  74                                         # (change requires restart)
  75 
- 76 # - Security and Authentication -
- 77 
- 78 #authentication_timeout = 1min          # 1s-600s
- 79 #ssl = off
- 80 #ssl_ciphers = 'HIGH:MEDIUM:+3DES:!aNULL' # allowed SSL ciphers
- 81 #ssl_prefer_server_ciphers = on
- 82 #ssl_ecdh_curve = 'prime256v1'
- 83 #ssl_dh_params_file = ''
- 84 #ssl_cert_file = 'server.crt'
- 85 #ssl_key_file = 'server.key'
- 86 #ssl_ca_file = ''
- 87 #ssl_crl_file = ''
-"/usr/local/postgresql/data/postgresql.conf" 658L, 22763C written                                                                                                                                         
-[postgres@bdn ~]$ 
-[postgres@bdn ~]$ ls
-[postgres@bdn ~]$ 
-[postgres@bdn ~]$ /usr/local/postgresql/bin/pg_ctl -D /usr/local/postgresql/data/ -l 
-/usr/local/postgresql/bin/pg_ctl: option requires an argument -- 'l'
-Try "pg_ctl --help" for more information.
-[postgres@bdn ~]$ /usr/local/postgresql/bin/pg_ctl -D /usr/local/postgresql/data/ -l /usr/local/postgresql/data/logfile start
+```
+
+```shell
+[postgres@zhangyz ~]$ /usr/local/postgresql/bin/pg_ctl -D /usr/local/postgresql/data/ -l /usr/local/postgresql/data/logfile.log start
 waiting for server to start.... done
 server started
-[postgres@bdn ~]$ 
-[postgres@bdn ~]$ /usr/local/postgresql/bin/psql 
+[postgres@zhangyz ~]$ /usr/local/postgresql/bin/psql 
 psql (10.3)
 Type "help" for help.
 
 postgres=# \password postgres
 Enter new password: 
 Enter it again: 
-postgres=# 
-postgres=# exit
-postgres-# 
-postgres-# quit
 postgres-# \q
 ```
