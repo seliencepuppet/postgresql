@@ -12,3 +12,7 @@
 
 #### 添加用户和用户组
 
+```shell
+[root@zhangyz ~]# useradd postgres
+[root@zhangyz ~]# groupadd postgres
+```
